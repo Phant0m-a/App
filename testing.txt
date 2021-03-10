@@ -1,0 +1,149 @@
+const express=require('express');
+const bodyParser=require('body-parser');
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+var firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
+
+const app=express();
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBtF_tqlqh5_auX_qlIpboXNmhQED-puhs",
+    authDomain: "reactjs-firebase-full.firebaseapp.com",
+    projectId: "reactjs-firebase-full",
+    storageBucket: "reactjs-firebase-full.appspot.com",
+    messagingSenderId: "960342625459",
+    appId: "1:960342625459:web:fd11575df014fdb309f4c6"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      console.log("User logged in");
+      var uid = user.uid;
+      // ...
+    } else {
+      // User is signed out
+      console.log("user not signed in");
+      // ...
+    }
+  });
+app.get('/',(req,res)=>{
+    res.send("Code is working");
+
+
+});
+app.get('/signin',(req,res)=>{
+    const auth = firebase.auth();
+    auth.signInWithEmailAndPassword("iamw11@gmail.com","password").then(res=>{
+     //   console.log(res);
+        res.send("user created");
+    }).catch(err=>{
+
+        switch(err.code){
+                case "auth/user-not-found":
+                    console.log("User not found");
+                
+                    break;
+
+                    default:
+                        console.log("Default");
+        }
+            res.send("User signed in")
+
+    });
+
+});
+
+app.get("/register",(req,resp)=>{
+    const auth = firebase.auth();
+    auth.createUserWithEmailAndPassword("iamw11@gmail.com","password").then(res=>{
+        console.log(res);
+        resp.send(res);
+    }).catch(err=>{
+        console.log(err);
+        resp.send("user not created");
+    })
+});
+
+app.get("/currentuser",(req,res)=>{
+    var user = firebase.auth().currentUser;
+
+    res.send({api:"CU",user});
+});
+app.get("/signout",(req,res)=>{
+    firebase.auth().signOut();
+    res.send("Signout");
+})
+
+app.get("/getdata",async(req,res)=>{
+    const firestore = firebase.firestore();
+      const snapeshot = await firestore.collection('users').get();
+            const data=[];
+
+            snapeshot.forEach(function(doc){
+            
+                const ob={
+                    id:doc.id,
+                    name:doc.data().name
+                }
+            
+                data.push(ob);
+                
+            })
+            console.log(data);
+ 
+          res.send(data);
+
+
+    //Testing for realtime transfering data
+    
+//     const firestore = firebase.firestore();
+//     const data=[];
+//   await  firestore.collection('users').onSnapshot(snapeshot=>{
+//         let changes=snapeshot.docChanges();
+//         changes.forEach(function(change){
+//                 const ob={
+//                     id:change.doc.id,
+//                     name:change.doc.data().name
+//                 }
+//                 if(change.type=='added'){
+//                     const v={
+//                       name:change.doc.data().name,
+//                         id:change.doc.id }
+//                         console.log(v);
+
+//                                  }
+        
+
+//         })
+        
+
+//                     res.send("fdlkj");
+
+//     })
+
+//result : Test fail. 
+
+
+});
+
+app.get("/postdata",(req,res)=>{
+    const db = firebase.firestore();
+
+});
+
+
+app.listen(5000,()=>{
+
+    console.log("server started at port 5000")
+    
+});

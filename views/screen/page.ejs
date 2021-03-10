@@ -1,0 +1,45 @@
+<div class="container">
+    
+    <h3><%= heading %></h3> 
+    <hr> 
+    <caption>List of users</caption>
+    <br>  
+<% let index=0;%>
+
+        <ul>
+          
+            <li>   
+                 <div class="table table-responsive">
+                    <table class="table">
+                        
+                        <tbody>
+                          <% snapshot.docs.forEach( doc =>{ %>
+                          <tr>
+                            
+                            <td><%= index=index+1%></td>
+                            <td><%=doc.data().question %></td>
+                            <td><a type="button" class="btn btn-success"id="<%=doc.id %>" href='/screen/edit/<%=doc.id %>/<%= heading %>' name="<%= heading %>" onclick=rem(id)>Edit</a></td>
+                            <td><a type="button" class="btn btn-danger"id="<%=doc.id %>" href='/screen/list/<%=doc.id %>/<%= heading %>' name="<%= heading %>" onclick=rem(id)>Delete</a></td>
+                          </tr>
+                          <% }) %>
+                        </tbody>
+                      </table>
+                  </div>
+              
+
+            </li>
+           
+        </ul> 
+   
+    <a class="btn btn-primary" type="button" href="/screen/admin">Back</a>
+   
+
+
+</div>
+<script>
+    function rem(id) {
+        let id = document.getElementById(id);
+        id.remove();
+    }
+</script>
+    

@@ -1,0 +1,71 @@
+<div class="container">
+
+    <h3>Admin Panel</h3>
+    <hr>
+    <br>
+    <form  id="#form" for="/admin" method="POST">
+    <br>
+    <div class="form-group">
+        <label >Writing About</label>
+        <br>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+              <input type="radio" name="options" id="option1" value="mySelf" checked> MY Self
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option2" value="himSelf"> Him Self
+            </label>
+            <label class="btn btn-secondary">
+              <input type="radio" name="options" id="option3" value="herSelf"> Her Self
+            </label>
+          </div>
+    </div>
+    <label for="question">Add New Question</label>
+     <div class="form-group">
+        <input class="form-control "  name="question" type="text" placeholder="Enter the question" minlength='10' maxlength="250">
+     </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+
+
+  <br>  
+  
+<div class="container">
+  
+    <h3>Question List</h3>
+    
+    <br>
+    <form  action="/screen/new-page" method="POST">
+        <select class="custom-select" name="select">
+            <!-- <option selected value="none">Question list</option> -->
+            <option value="mySelf" disabled selected>Select Question list Type</option>
+            <option value="mySelf">My self</option>
+            <option value="himSelf">Him self</option>
+            <option value="herSelf">Her self</option>
+          </select>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary">Get</button>
+    </form>
+    <br>
+    <br>
+    <br>
+  
+</div>
+
+<div class="container">
+
+  <table>
+    <tr >
+        <td><li>What is your Name?</li></td>
+        <td><button class="btn btn-success">Edit</button></td>
+        <td><button class="btn btn-danger">Delete</button></td>
+    </tr>
+
+</table>
+<a href="/screen/signout/signout" class="btn btn-Danger" type="button">Signout</a>
+</div>
+
+
+
