@@ -16,7 +16,8 @@
                           <% snapshot.docs.forEach( doc =>{ %>
                           <tr>
                             
-                            <td><%= index=index+1%></td>
+                            <td><%= index %></td>
+                                <% index=index+1%>
                             <td><%=doc.data().question %></td>
                             <td><a type="button" class="btn btn-success"id="<%=doc.id %>" href='/screen/edit/<%=doc.id %>/<%= heading %>' name="<%= heading %>" onclick=rem(id)>Edit</a></td>
                             <td><a type="button" class="btn btn-danger"id="<%=doc.id %>" href='/screen/list/<%=doc.id %>/<%= heading %>' name="<%= heading %>" onclick=rem(id)>Delete</a></td>

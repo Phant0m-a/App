@@ -1,26 +1,25 @@
 <div class="container">
     <form for="/signin" method="post">
         <h3>Login</h3>
+        <hr>
+        <br>
         <div class="form-wrapper">
+            <label for="email">Email</label>
             <input name="email" type="email" id="email" placeholder="Email Address" class="form-control">
             <i class="zmdi zmdi-email"></i>
         </div>
         <div class="form-wrapper">
+            <label for="password">Password</label>
             <input name="password" type="password" id="password" placeholder="Password" class="form-control">
             <i class="zmdi zmdi zmdi-lock"></i>
         </div>
+        <br>
         
         <div class="form-group container-login100-form-btn">
-            <button id="btn-login" type="submit">
+            <button class='btn btn-primary' id="btn-login" type="submit">
                 Login
                 <i class="zmdi zmdi-arrow-right"></i>
             </button>
         </div>
-    
-        <div class="w-full text-center" style="margin-top: 66%; font-size:15px;">
-        <a href="signup.html" class="text-dark">
-            Not have an account? Sign up 
-        </a>
-    </div>
     </form> 
 </div>

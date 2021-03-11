@@ -1,7 +1,5 @@
 const express = require('express')
 const router = express.Router()
-
-// 
 var admin = require("firebase-admin");
 const firebase = require('firebase');
 // const firebase = require("firebase/app");
@@ -17,31 +15,36 @@ var firebaseConfig = {
     appId: "1:667358112659:web:adc2bb76a044eb6c425666",
     measurementId: "G-4SXFPNDF2N"
   };
-//   // Initialize Firebase
+// Initialize Firebase
    firebase.initializeApp(firebaseConfig);
-//    firebase.initializeApp(serviceAccount);
+
 
   const dbs = firebase.firestore();
    dbs.settings({ timestampsInSnapshot: true});
-//    dbs.collection('type1').get().then( (snapshot) =>{ 
-//     snapshot.docs.forEach( doc =>{ 
-//         console.log(doc.data()); 
-//     })   
+
+
+// router.get('/', (req,res)=>{
+//     res.render('screen/index')
 // })
-
-// 
-
-
-router.get('/', (req,res)=>{
-    res.render('screen/index')
-})
 // test area
+router.get('/hrefReq/:reqs', (req,res) =>{
+    if(req.params.reqs == 'admin'){
+        console.log(req.params.reqs);
+        if(firebase.auth().currentUser){
+            res.render('screen/admin');
+        }else{  
+              res.render('screen/signin');
+        }
+    }
+    
+})
+
 
 // sign-in get 
 router.get('/signin',(req,res)=>{  
     var user = firebase.auth().currentUser;
     if(firebase.auth().currentUser){
-        res.redirect('/screen/admin');
+        res.render('screen/admin');
     }else{  
           res.render('screen/signin');
     }
@@ -54,7 +57,7 @@ router.post('/signin',(req,res)=>{
     let u_password = req.body.password;
     const auth = firebase.auth();
     auth.signInWithEmailAndPassword(u_email, u_password).then(resp=>{
-      // console.log(res);
+    
       res.render("screen/admin-panel");
       
     }).catch(err=>{
@@ -82,15 +85,6 @@ router.get('/signout/:signout',(req,res)=>{
 
 // test area end
 
-
-// router.get('/personality', (req,res)=>{
-//     res.render('screen/personality')
-// } )
-// //test route
-// router.get('/gender', (req,res) =>{
-//     res.render('screen/gender')
-// });
-
 //admin route
 router.get('/admin', (req,res) =>{
      if(firebase.auth().currentUser){
@@ -100,14 +94,14 @@ router.get('/admin', (req,res) =>{
         console.log("user is not logedin")
         res.redirect('/screen/signin');
     }
-   // res.render('screen/admin-panel');
+  
 })
 
 // test route
  router.get('/new-page', (req,res) =>{
      res.render('screen/page');
  })
- 
+
 router.post('/new-page', (req,res)=>{
         // select wheel
      console.log(req.body.select);
@@ -133,7 +127,7 @@ router.post('/new-page', (req,res)=>{
 router.get('/list/:d_id/:col_name', (req,res) =>{
     console.log(req.params.d_id);
     console.log(req.params.col_name);
-    // let type= req.params.type;
+ 
     let col_name = req.params.col_name;
     let d_id = req.params.d_id;
 
@@ -194,11 +188,6 @@ router.post('/edit/edit', (req,res)=>{
 })
 
 
-// round 2
-// router.get('/round2', (req,res){
-//  res.send('d');
-// });
-
 // getting question to upload on firestore
 router.post('/admin', (req,res) =>{
 
@@ -213,37 +202,12 @@ if(question !== undefined && question !== '' && question.length >= 10 ){
     console.log(question);
     res.redirect('/screen/admin');
 }else{
-    console.log('redirect /screen/admin triggered!...')
+    console.log('redirect: /screen/admin triggered!...')
     res.redirect('/screen/admin');
 }
     
 })
 
-// get-questions
-// router.get('/get-questions', (req,res) =>{
-//     console.log(req.body.select);
-
-// })
-
-// coming from personality select 
-router.get('/:type', (req,res) =>{
-    // get type of writing and get specific list to display data from
-    const type=req.params.type;
-    if(type === 'type1'){
-        console.log('triggered 1');
-        res.render('screen/type1')
-    }
-
-    if(type === 'admin'){
-        console.log('triggered admin');
-        res.render('screen/admin-panel');
-    }
-
-    if(type === 'type3'){
-        console.log('triggered 3');
-    }
-    // res.render('screen/gender')
-});
 
 module.exports = router
 
