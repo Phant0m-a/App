@@ -5,7 +5,7 @@
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
-const dotenv = require('dotenv');
+//const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index')
 const screenRouter = require('./routes/screen')
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: false}));
 app.use(expressLayouts)
 app.use(express.static('public'));
 
-dotenv.config()
+//dotenv.config()
 
 // All routes
 app.use('/', indexRouter)
