@@ -31,7 +31,7 @@ router.get('/hrefReq/:reqs', (req,res) =>{
     if(req.params.reqs == 'admin'){
         console.log(req.params.reqs);
         if(firebase.auth().currentUser){
-            res.render('screen/admin');
+            res.redirect('/screen/admin');
         }else{  
               res.render('screen/signin');
         }
@@ -44,7 +44,7 @@ router.get('/hrefReq/:reqs', (req,res) =>{
 router.get('/signin',(req,res)=>{  
     var user = firebase.auth().currentUser;
     if(firebase.auth().currentUser){
-        res.render('screen/admin');
+        res.render('screen/admin-panel');
     }else{  
           res.render('screen/signin');
     }

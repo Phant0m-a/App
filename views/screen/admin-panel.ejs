@@ -10,19 +10,19 @@
         <br>
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" value="mySelf" checked> MY Self
+              <input type="radio" name="options" id="option1" value="mySelf" checked> Myself
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" value="himSelf"> Him Self
+              <input type="radio" name="options" id="option2" value="himSelf"> Himself
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" value="herSelf"> Her Self
+              <input type="radio" name="options" id="option3" value="herSelf"> Herself
             </label>
           </div>
     </div>
     <label for="question">Add New Question</label>
      <div class="form-group">
-        <input class="form-control "  name="question" type="text" placeholder="Enter the question" minlength='10' maxlength="250">
+        <input class="form-control"  name="question" type="text" placeholder="Enter the question" minlength='10' maxlength="250" autocomplete="off">
      </div>
         <button type="submit" class="btn btn-primary">Add</button>
     </form>
@@ -38,10 +38,10 @@
     <form  action="/screen/new-page" method="POST">
         <select class="custom-select" name="select">
             <!-- <option selected value="none">Question list</option> -->
-            <option value="mySelf" disabled selected>Select Question list Type</option>
-            <option value="mySelf">My self</option>
-            <option value="himSelf">Him self</option>
-            <option value="herSelf">Her self</option>
+            <option value="none" disabled selected>Select Question list Type</option>
+            <option value="mySelf">Myself</option>
+            <option value="himSelf">Himself</option>
+            <option value="herSelf">Herself</option>
           </select>
           <br>
           <br>
