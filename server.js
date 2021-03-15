@@ -5,7 +5,7 @@
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index')
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true}));
 app.use(expressLayouts)
 app.use(express.static('public'));
 app.use(cookieParser());
-dotenv.config()
+// dotenv.config()
 
 
 // testing stuff
