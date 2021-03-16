@@ -18,7 +18,7 @@ const auth = async (req,res,next) => {
 
     }
     catch(error){
-        res.status(401).send(error);
+        res.status(401).redirect('/screen/signin');
     }
 }
 
