@@ -3,29 +3,30 @@
     <h3>Admin Panel</h3>
     <hr>
     <br>
-    <form  id="#form"  action="/screen/admin" method="POST">
-    <br>
-    <div class="form-group">
+    
         <label >Writing About</label>
         <br>
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" value="mySelf" checked> Myself
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" value="himSelf"> Himself
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" value="herSelf"> Herself
-            </label>
-          </div>
+        <div class="form-group">
+          <h2>Existing Collections</h2>
+          <br> 
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <!-- they can be href to new screen with value from selected buttons -->
+              <label class="btn btn-secondary">
+                <a type="button" class="text-light"name="options" id="option3" value="Spring" href="/screen/writingType/yourSelf"> YOURSELF
+              </label></a>
+              <label class="btn btn-secondary">
+                <a type="button" class="text-light" name="options" id="option1" value="Winter" href="/screen/writingType/himSelf" checked> HIMSELF
+              </label>
+              <label class="">
+                <a type="button" class="btn btn-secondary" name="options" id="option2" value="Summer" href="/screen/writingType/herSelf"> HERSELF
+              </label></a>
+              
+            </div>
+  
+          
+      </div>
     </div>
-    <label for="question">Add New Question</label>
-     <div class="form-group">
-        <input class="form-control"  name="question" type="text" placeholder="Enter the question" minlength='10' maxlength="250" autocomplete="off">
-     </div>
-        <button type="submit" class="btn btn-primary">Add</button>
-    </form>
+    
 </div>
 
   <br>  

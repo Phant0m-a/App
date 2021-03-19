@@ -1,0 +1,19 @@
+<div class="container">
+    <p>Back to Admin Panel</p>
+    <a href="/screen/admin" type="button" class="btn btn-dark">Back</a>
+    
+    <form  id="#form"  action="/screen/writingType" method="POST">
+        <br>
+        <div class="form-group">
+            <h2>Writing About</h2>
+            <h3 class='text-success'><%= type%></h3>
+            <input type="hidden" value="<%=type%>" name="options">
+            <br>
+            <label for="question">Add New Question</label>
+            <div class="form-group">
+               <input class="form-control"  name="question" type="text" placeholder="Enter the question" minlength='10' maxlength="250" autocomplete="off">
+            </div>
+               <button type="submit" class="btn btn-primary">Add</button>
+           </form>
+          
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+    <h1>Admin Panel</h1>
+    <hr>
+    <br>
+  
+    <h2>Customers List</h2>
+    <br>
+    <a class="btn btn-primary" type="button" href="/screen/customers/hello">Get</a>
+   
+</div>
+<br>
+<br>
+<div class="container">
+    <h2>Add New Collection/Product</h2>
+    
+    <br>
+   <form action="/screen/addNewCollection" method="post">
+    <div class="form-group">
+        <input type="text" name="collection" class="form-control" id="collection" placeholder="New Collection"required>
+        <br>
+        
+        <button type="submit" class="btn btn-success">Add</button>
+    </div>
+
+    </form>
+    <br>
+    <div class="form-group">
+        <h2>Existing Collections</h2>
+        <br> 
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <!-- they can be href to new screen with value from selected buttons -->
+            <label class="btn btn-secondary">
+              <a type="button" class="text-light" name="options" id="option1" value="Winter" href="/screen/redirector:Winter" checked> Winter
+            </label>
+            <label class="">
+              <a type="button" class="btn btn-secondary" name="options" id="option2" value="Summer" href="/screen/redirector:Summer"> Summer
+            </label></a>
+            <label class="btn btn-secondary">
+              <a type="button" class="text-light"name="options" id="option3" value="Spring" href="/screen/redirector:Spring"> Spring
+            </label></a>
+          </div>
+
+        
+    </div>
+    <br>
+         <form action="/screen/redirector" method="POST">
+          <select class="custom-select custom-select-lg mb-3" name="selector">
+            <option disabled>Existing Collections</option>
+            <% collections.docs.forEach((collection) => { %>
+            <option value="<%= collection.id %>"><%= collection.id %></option>
+            <% }) %>
+          </select> 
+          <br>
+          <button class="btn btn-primary">Get</button>
+         </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <a href="/signout/:signout" type="button" class="btn btn-danger">Signout</a>
+    
+</div>

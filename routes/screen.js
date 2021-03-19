@@ -29,6 +29,7 @@ var firebaseConfig = {
     appId: "1:130015415803:web:60c9ef4bd4460355d2cf5e",
     measurementId: "G-LDEE9MY75Y"
   };
+
 // Initialize Firebase
    firebase.initializeApp(firebaseConfig);
 
@@ -171,7 +172,7 @@ router.get('/list/:d_id/:col_name',auth, (req,res) =>{
    //delete doc
     dbs.collection(col_name).doc(d_id).delete({});
    //load list again afterwards 
-    dbs.collection(col_name).orderBy('timeStamp').get().then( (snapshot) =>
+    dbs.collection(col_name).orderBy('timeStamp',"asc").get().then( (snapshot) =>
     {
         let id_list= [];
       
@@ -214,7 +215,7 @@ router.post('/edit/edit',auth, (req,res)=>{
             timeStamp: timestamp
         });
 
-        dbs.collection(col_name).orderBy('timeStamp').get().then( (snapshot) =>
+        dbs.collection(col_name).orderBy('timeStamp',"asc").get().then( (snapshot) =>
         {   
             let id_list= [];
             snapshot.docs.forEach( doc =>{ 
@@ -231,9 +232,29 @@ router.post('/edit/edit',auth, (req,res)=>{
 
 
 // getting question to upload on firestore
-router.post('/admin',auth, (req,res) =>{
+// router.post('/admin',auth, (req,res) =>{
 
-let questionType = req.body.options;
+// let questionType = req.body.options;
+// let question = req.body.question;
+
+// if(question !== undefined && question !== '' && question.length >= 10 ){
+//     var timestamp = new Date().getTime();
+
+//     dbs.collection(questionType).add({
+//         question: question,
+//         timeStamp: timestamp
+//     });
+
+//     res.redirect('/screen/admin');
+// }else{
+  
+//     res.redirect('/screen/admin');
+// }
+    
+// })
+// new better version
+router.post('/writingType',auth,(req,res)=>{
+    let questionType = req.body.options;
 let question = req.body.question;
 
 if(question !== undefined && question !== '' && question.length >= 10 ){
@@ -242,15 +263,35 @@ if(question !== undefined && question !== '' && question.length >= 10 ){
     dbs.collection(questionType).add({
         question: question,
         timeStamp: timestamp
+    }).then(()=>{
+        res.render('screen/writingType',{type:questionType});
     });
 
-    res.redirect('/screen/admin');
+   // res.redirect('/screen/admin');
 }else{
-  
     res.redirect('/screen/admin');
 }
-    
+  
 })
+
+
+// redirect to collection type page
+router.get('/writingType/:type',auth,(req,res)=>{
+    console.log(req.params.type);
+    if(req.params.type == 'himSelf'){
+        res.render('screen/writingType',{type: req.params.type})
+    }
+    else if(req.params.type == 'herSelf'){
+        res.render('screen/writingType',{type: req.params.type})
+    }
+    else if(req.params.type == 'yourSelf'){
+        res.render('screen/writingType',{type: req.params.type})
+    }
+    else{
+        res.redirect('/screen/admin')
+    }
+})
+
 
 
 module.exports = router

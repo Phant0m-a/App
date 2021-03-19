@@ -1,0 +1,35 @@
+<form action='/screen/addProduct' method="POST">
+    <div class="container">
+        <h2> Collection Name:</h2>
+        <span style="color:rgb(68, 209, 68)"><%= collectionName%></span>
+        <!-- mention collection name in green : winter -->
+        <input type="hidden" name="collectionName" value="<%= collectionName%>">
+    <hr>
+    <br>
+    <h3>Product Name</h3>
+    <br>
+    <div class="form-group">
+        <!-- check if product already exists -->
+        <input type="text" name="product_name" class="form-control" placeholder="Product Name" required>
+    </div>
+        <br>
+        <br>
+        <h3>Add Image</h3>
+        <br>
+      <div class="form-group">
+        <input type="file"   name="file" id="image">
+      </div>
+        <br>
+        <br>
+        <h3>Price</h3>
+        <br><div class="form-group">
+            
+        <input type="number" min='1' name="price" placeholder="Price" class="form-control" required>   
+        </div>
+        <br>
+        <button class="btn btn-success btn-lg">Add</button>
+  
+    </div>
+    
+
+</form>
