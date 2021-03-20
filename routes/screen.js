@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken');
 firebase.auth.Auth.Persistence.NONE;
 
 
-// var firebaseConfig = {
+var firebaseConfig = {
 //     apiKey: "AIzaSyBHd50N3vrsVyjUYUa-753UnpZQesUHHWU",
 //     authDomain: "node-web-app-9a6e2.firebaseapp.com",
 //     databaseURL: "https://node-web-app-9a6e2-default-rtdb.firebaseio.com",
@@ -20,7 +20,7 @@ firebase.auth.Auth.Persistence.NONE;
 //     appId: "1:667358112659:web:adc2bb76a044eb6c425666",
 //     measurementId: "G-4SXFPNDF2N"
 //   };
-var firebaseConfig = {
+// var firebaseConfig = {
     apiKey: "AIzaSyAcjPD8ncO6m_nZ5Rq18wmEspcRsNwCIvo",
     authDomain: "test-f2508.firebaseapp.com",
     projectId: "test-f2508",
@@ -256,7 +256,7 @@ router.post('/edit/edit',auth, (req,res)=>{
 router.post('/writingType',auth,(req,res)=>{
     let questionType = req.body.options;
 let question = req.body.question;
-
+console.log(req.body);
 if(question !== undefined && question !== '' && question.length >= 10 ){
     var timestamp = new Date().getTime();
 
@@ -278,13 +278,13 @@ if(question !== undefined && question !== '' && question.length >= 10 ){
 // redirect to collection type page
 router.get('/writingType/:type',auth,(req,res)=>{
     console.log(req.params.type);
-    if(req.params.type == 'Himself'){
+    if(req.params.type == 'himSelf'){
         res.render('screen/writingType',{type: req.params.type})
     }
-    else if(req.params.type == 'Herself'){
+    else if(req.params.type == 'herSelf'){
         res.render('screen/writingType',{type: req.params.type})
     }
-    else if(req.params.type == 'Yourself'){
+    else if(req.params.type == 'mySelf'){
         res.render('screen/writingType',{type: req.params.type})
     }
     else{
