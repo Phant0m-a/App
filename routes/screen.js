@@ -68,7 +68,7 @@ router.post('/signin', async (req,res) => {
         // maxAge: 60000,
         maxAge: 60*60*6*1000,
         httpOnly: true
-        ,secure: true
+        //,secure: true
         })
             res.redirect("/screen/admin");
         })
@@ -278,13 +278,13 @@ if(question !== undefined && question !== '' && question.length >= 10 ){
 // redirect to collection type page
 router.get('/writingType/:type',auth,(req,res)=>{
     console.log(req.params.type);
-    if(req.params.type == 'himSelf'){
+    if(req.params.type == 'Himself'){
         res.render('screen/writingType',{type: req.params.type})
     }
-    else if(req.params.type == 'herSelf'){
+    else if(req.params.type == 'Herself'){
         res.render('screen/writingType',{type: req.params.type})
     }
-    else if(req.params.type == 'yourSelf'){
+    else if(req.params.type == 'Yourself'){
         res.render('screen/writingType',{type: req.params.type})
     }
     else{
