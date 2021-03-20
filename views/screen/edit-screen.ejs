@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="background-color: rgb(218, 218, 218);padding:20px;">
     <form  id="#form" action="/screen/edit/edit" method="POST">
         <br>
         
@@ -7,7 +7,7 @@
         <br>
          <div class="form-group">
             <label for="">Collection Name:</label>
-             <h4 name="col_name" class="text-success"><%= col_name %></h4>
+             <h4 name="col_name" class="text-success" style='text-transform: uppercase;letter-spacing:1px;'><%= col_name %></h4>
              <p class='text-muted' style='display:none'>Document id:</p>
             <input style='display:none' class="form-control"  name="tid" type="text" value="<%= d_id %>"  >
             <!--  -->
