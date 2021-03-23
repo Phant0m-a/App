@@ -16,8 +16,16 @@ app.set('views',__dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true}));
 app.use(expressLayouts)
-app.use(express.static('public'));
+app.use(express.static(__dirname+'public'));
 app.use(cookieParser());
+const csv = require('csvtojson');
+var upload = require('express-fileupload')
+app.use(upload({
+    preserveExtension: true,
+    preserveExtension: 3,
+    useTempFiles : true,
+    tempFileDir : '../tmp/'
+}))
 // dotenv.config()
 
 
