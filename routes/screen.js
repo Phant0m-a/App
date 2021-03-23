@@ -11,25 +11,25 @@ const csv = require('csvtojson');
 firebase.auth.Auth.Persistence.NONE;
 
 
-var firebaseConfig = {
-    apiKey: "AIzaSyBHd50N3vrsVyjUYUa-753UnpZQesUHHWU",
-    authDomain: "node-web-app-9a6e2.firebaseapp.com",
-    databaseURL: "https://node-web-app-9a6e2-default-rtdb.firebaseio.com",
-    projectId: "node-web-app-9a6e2",
-    storageBucket: "node-web-app-9a6e2.appspot.com",
-    messagingSenderId: "667358112659",
-    appId: "1:667358112659:web:adc2bb76a044eb6c425666",
-    measurementId: "G-4SXFPNDF2N"
-  };
 // var firebaseConfig = {
-//     apiKey: "AIzaSyAcjPD8ncO6m_nZ5Rq18wmEspcRsNwCIvo",
-//     authDomain: "test-f2508.firebaseapp.com",
-//     projectId: "test-f2508",
-//     storageBucket: "test-f2508.appspot.com",
-//     messagingSenderId: "130015415803",
-//     appId: "1:130015415803:web:60c9ef4bd4460355d2cf5e",
-//     measurementId: "G-LDEE9MY75Y"
+//     apiKey: "AIzaSyBHd50N3vrsVyjUYUa-753UnpZQesUHHWU",
+//     authDomain: "node-web-app-9a6e2.firebaseapp.com",
+//     databaseURL: "https://node-web-app-9a6e2-default-rtdb.firebaseio.com",
+//     projectId: "node-web-app-9a6e2",
+//     storageBucket: "node-web-app-9a6e2.appspot.com",
+//     messagingSenderId: "667358112659",
+//     appId: "1:667358112659:web:adc2bb76a044eb6c425666",
+//     measurementId: "G-4SXFPNDF2N"
 //   };
+var firebaseConfig = {
+    apiKey: "AIzaSyAcjPD8ncO6m_nZ5Rq18wmEspcRsNwCIvo",
+    authDomain: "test-f2508.firebaseapp.com",
+    projectId: "test-f2508",
+    storageBucket: "test-f2508.appspot.com",
+    messagingSenderId: "130015415803",
+    appId: "1:130015415803:web:60c9ef4bd4460355d2cf5e",
+    measurementId: "G-LDEE9MY75Y"
+  };
 
 // Initialize Firebase
    firebase.initializeApp(firebaseConfig);
@@ -137,7 +137,7 @@ router.post('/signin', async (req,res) => {
         // maxAge: 60000,
         maxAge: 60*60*6*1000,
         httpOnly: true
-        // ,secure: true
+        ,secure: true
         })
             res.redirect("/screen/admin");
         })
@@ -329,7 +329,7 @@ if(question !== undefined && question !== '' && question.length >= 10 ){
 
     dbs.collection(questionType).add({
         question: question,
-        timeStamp: timestamp
+        No: timestamp
     }).then(()=>{
         res.render('screen/writingType',{type:questionType});
     });
