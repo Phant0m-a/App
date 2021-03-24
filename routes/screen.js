@@ -80,7 +80,7 @@ router.post('/uploadfile', auth,async(req,res)=>{
                         console.log(item);
                         d=item;
                      await   dbs.collection(type).add({
-                        id:item.No,
+                        No:item.No,
                         question:item.STATEMENTS
                      });
 
