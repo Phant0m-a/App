@@ -80,7 +80,7 @@ router.post('/uploadfile', auth,async(req,res)=>{
                         console.log(item);
                         d=item;
                      await   dbs.collection(type).add({
-                        No:item.No,
+                        No:parseInt(item.No),
                         question:item.STATEMENTS
                      });
 
@@ -92,6 +92,8 @@ router.post('/uploadfile', auth,async(req,res)=>{
         })
         // const jsonArray = await csv().fromFile('./public/upload/'+filename);
       
+    }else{
+        res.redirect('/screen/admin');
     }
 })
 
@@ -137,7 +139,7 @@ router.post('/signin', async (req,res) => {
         // maxAge: 60000,
         maxAge: 60*60*6*1000,
         httpOnly: true
-        ,secure: true
+         ,secure: true
         })
             res.redirect("/screen/admin");
         })
@@ -217,7 +219,7 @@ router.post('/new-page',auth, (req,res)=>{
      let Qget = req.body.select;
      if(Qget !== undefined && Qget !== '' && Qget !== 'none')
      {   
-     dbs.collection(Qget).orderBy("timeStamp", "asc").get().then( (snapshot) =>
+     dbs.collection(Qget).orderBy("No", "asc").get().then( (snapshot) =>
      {
         let id_list= [];
        // console.log(snapshot.docs);
@@ -241,7 +243,7 @@ router.get('/list/:d_id/:col_name',auth, (req,res) =>{
    //delete doc
     dbs.collection(col_name).doc(d_id).delete({});
    //load list again afterwards 
-    dbs.collection(col_name).orderBy('timeStamp',"asc").get().then( (snapshot) =>
+    dbs.collection(col_name).orderBy('No',"asc").get().then( (snapshot) =>
     {
         let id_list= [];
       
@@ -282,7 +284,7 @@ router.post('/edit/edit',auth, (req,res)=>{
             question: q
         });
 
-        dbs.collection(col_name).orderBy('timeStamp',"asc").get().then( (snapshot) =>
+        dbs.collection(col_name).orderBy('No',"asc").get().then( (snapshot) =>
         {   
             let id_list= [];
             snapshot.docs.forEach( doc =>{ 
@@ -320,19 +322,42 @@ router.post('/edit/edit',auth, (req,res)=>{
     
 // })
 // new better version
-router.post('/writingType',auth,(req,res)=>{
+router.post('/writingType',auth,async(req,res)=>{
     let questionType = req.body.options;
 let question = req.body.question;
-console.log(req.body);
+// console.log(req.body);
 if(question !== undefined && question !== '' && question.length >= 10 ){
-    var timestamp = new Date().getTime();
+    // var timestamp = new Date().getTime();
+// find the eg. mySelf collection- and get its doc eg. No and then add index+1 to it. and then add.
+// let number ;
+// let count = 0;
+// await dbs.collection(questionType).orderBy('No').get('No').then((no)=>{
+//     number = no.docs;
+//     number.forEach((i)=>{
+//         console.log('logging questions: '+ i.data().No);
+//         count= i.data().No;
+//         console.log('count is: '+ count);
+//     })
+//     number= count++;
+//     console.log('number: '+ number);
+// })
+var len;
+let st;
+dbs.collection(questionType).get().then(async snapshot => {
 
-    dbs.collection(questionType).add({
+ len  = snapshot.size;
+ len=len+1;
+    console.log(len);
+ 
+    await  dbs.collection(questionType).add({
         question: question,
-        No: timestamp
+        No: len
     }).then(()=>{
         res.render('screen/writingType',{type:questionType});
     });
+ })
+
+
 
    // res.redirect('/screen/admin');
 }else{
